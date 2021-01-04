@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ServiceBean {
+public class ServiceBeanConfiguration {
     @Bean
     PostService postService(PostRepository postRepository) {
         return new PostServiceImpl(postRepository);

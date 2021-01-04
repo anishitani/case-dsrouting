@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+
+  leader:
+    image: 'docker.io/bitnami/postgresql:13-debian-10'
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_REPLICATION_MODE=master
+      - POSTGRESQL_REPLICATION_USER=replication
+      - POSTGRESQL_REPLICATION_PASSWORD=replication
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_PASSWORD=postgres
+      - POSTGRESQL_DATABASE=postgres
+      - ALLOW_EMPTY_PASSWORD=yes
+
+  replica:
+    image: 'docker.io/bitnami/postgresql:13-debian-10'
+    ports:
+      - 5433:5432
+    depends_on:
+      - leader
+    environment:
+      - POSTGRESQL_REPLICATION_MODE=slave
+      - POSTGRESQL_REPLICATION_USER=replication
+      - POSTGRESQL_REPLICATION_PASSWORD=replication
+      - POSTGRESQL_MASTER_HOST=leader
+      - POSTGRESQL_PASSWORD=postgres
+      - POSTGRESQL_MASTER_PORT_NUMBER=5432
+      - ALLOW_EMPTY_PASSWORD=yes

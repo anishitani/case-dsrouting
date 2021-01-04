@@ -6,7 +6,7 @@ public class Post {
     Long id;
     String title;
     String summary;
-    String body;
+    String content;
     String author;
     List<String> tags;
 
@@ -34,12 +34,12 @@ public class Post {
         this.summary = summary;
     }
 
-    public String getBody() {
-        return body;
+    public String getContent() {
+        return content;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getAuthor() {
