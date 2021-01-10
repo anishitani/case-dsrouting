@@ -29,3 +29,16 @@ services:
       - POSTGRESQL_PASSWORD=postgres
       - POSTGRESQL_MASTER_PORT_NUMBER=5432
       - ALLOW_EMPTY_PASSWORD=yes
+
+  app:
+    build: ../dsrouting
+    ports:
+      - 8080:8080
+      - 8081:8081
+    environment:
+      DB_RO_URL: replica
+      DB_RW_URL: leader
+      DB_NAME: postgres
+      DB_USER: postgres
+      DB_PASS: postgres
+      DB_PORT: 5432

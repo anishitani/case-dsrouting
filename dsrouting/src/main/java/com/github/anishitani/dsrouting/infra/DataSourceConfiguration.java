@@ -43,20 +43,6 @@ public class DataSourceConfiguration {
     }
 
     @Bean
-    DataSourceConnectionProvider connectionProvider(DataSource dataSource){
-        return new DataSourceConnectionProvider(new TransactionAwareDataSourceProxy(dataSource));
-    }
-
-    @Bean
-    DefaultDSLContext defaultDSLContext(DataSource dataSource){
-        DefaultConfiguration configuration = new DefaultConfiguration();
-        configuration.setSQLDialect(SQLDialect.POSTGRES);
-        configuration.setConnectionProvider(connectionProvider(dataSource));
-        configuration.setExecuteListenerProvider(new DefaultExecuteListenerProvider(new ExceptionTranslator()));
-        return new DefaultDSLContext(configuration);
-    }
-
-    @Bean
     TransactionRoutingDataSource dataSourceRouter(
             @Qualifier("roConfig") HikariConfig roConfig,
             @Qualifier("rwConfig") HikariConfig rwConfig
